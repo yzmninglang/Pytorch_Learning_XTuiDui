@@ -19,3 +19,7 @@
 
 
 
+### Course09-Pool
+
+[Course09-Pool](./Course09-Pool),对于池化来说，一定要注意nn.MaxPool2d只接受tensor元素类型为float的类型，因此需要提前将其转化为float32，方法是在tensor(...,dtype=torch.float32),除此之外，注意ceilmode的设置
+
