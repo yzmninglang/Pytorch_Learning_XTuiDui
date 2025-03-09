@@ -38,3 +38,9 @@
 - [torch.flatten — PyTorch 2.6 documentation](https://pytorch.org/docs/stable/generated/torch.flatten.html)
 - [Pytorch 中 torch.flatten() 和 torch.nn.Flatten() 实例详解 - 别关注我了，私信我吧 - 博客园](https://www.cnblogs.com/BlairGrowing/p/16074632.html)
 
+
+
+###  [Course12-Sequential](Course12-Sequential)
+
+完成了Sequential的部分，一个要注意的还是Flatten的默认参数start_dim为1,所以对应batch_size的那部分的数字不会参与展平[Flatten — PyTorch 2.6 documentation](https://pytorch.org/docs/stable/generated/torch.nn.Flatten.html)。除此之外，学会了Sequential的使用，可以直接把网络操作丢到Sequential函数中去，**不需要将网络组成数组**，然后直接在forward中调用即可[Sequential — PyTorch 2.6 documentation](https://pytorch.org/docs/stable/generated/torch.nn.Sequential.html)。
+
