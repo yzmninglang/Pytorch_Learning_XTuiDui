@@ -70,3 +70,6 @@ optm.zero_grad()
 
 
 
+### [Course16-ModifyNN](Course16-ModifyNN)
+
+基于VGG16的修改网络，参考文档[vgg16 — Torchvision 0.21 documentation](https://pytorch.org/vision/stable/models/generated/torchvision.models.vgg16.html#torchvision.models.vgg16)。添加一层add_module，修改某一层vgg16_false.classifier[6] =  nn.Linear(4096,100)
