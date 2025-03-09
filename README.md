@@ -73,3 +73,12 @@ optm.zero_grad()
 ### [Course16-ModifyNN](Course16-ModifyNN)
 
 基于VGG16的修改网络，参考文档[vgg16 — Torchvision 0.21 documentation](https://pytorch.org/vision/stable/models/generated/torchvision.models.vgg16.html#torchvision.models.vgg16)。添加一层add_module，修改某一层vgg16_false.classifier[6] =  nn.Linear(4096,100)
+
+
+
+
+
+###   [Course17-ModelSave](Course17-ModelSave) 
+
+两种保存模型的方式，一种是同时保存模型参数和网络结构，另一种是只保留网络参数（字典的形式）。，需要考量到`state_dict`函数对载入和保存。
+
