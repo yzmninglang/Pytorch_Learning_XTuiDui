@@ -5,7 +5,7 @@
 
 ## 目录结构
 
-以下是本项目的主要目录结构及其用途说明，帮助你快速了解和导航到所需的文件。
+以下是本项目的主要目录结构及其用途说明，帮助你快速了解和导航到所需的文件，其中涉及到的文档部分请参考 [Doc](Doc) 目录
 
 
 
@@ -44,3 +44,14 @@
 
 完成了Sequential的部分，一个要注意的还是Flatten的默认参数start_dim为1,所以对应batch_size的那部分的数字不会参与展平[Flatten — PyTorch 2.6 documentation](https://pytorch.org/docs/stable/generated/torch.nn.Flatten.html)。除此之外，学会了Sequential的使用，可以直接把网络操作丢到Sequential函数中去，**不需要将网络组成数组**，然后直接在forward中调用即可[Sequential — PyTorch 2.6 documentation](https://pytorch.org/docs/stable/generated/torch.nn.Sequential.html)。
 
+
+
+###  [Course13-LossFunc](Course13-LossFunc)
+
+常见的LossFunc：[Pytorch的损失函数Loss function接口介绍 - 知乎](https://zhuanlan.zhihu.com/p/267787260)。主要介绍L1，L2，和Cross-entropy
+
+
+
+###  [Course14-Loss-Network](Course14-Loss-Network)
+
+使用 [Course12-Sequential](Course12-Sequential) 定义的分类网络来使用LossFunc，涉及到了梯度和反向传播，**反向传播的对象是LossFunction，不是Module**
