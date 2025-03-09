@@ -55,3 +55,18 @@
 ###  [Course14-Loss-Network](Course14-Loss-Network)
 
 使用 [Course12-Sequential](Course12-Sequential) 定义的分类网络来使用LossFunc，涉及到了梯度和反向传播，**反向传播的对象是LossFunction，不是Module**
+
+
+
+###  [Course15-Optim](Course15-Optim) 
+
+增加了优化器部分，这部分相对来说较为简单，参考官方文档[torch.optim — PyTorch 2.6 documentation](https://pytorch.org/docs/stable/optim.html)。主要需要传入两个参数，即model.parameter()和lr(learning rate)。，设置合适的合适的值，需要注意的是，在每次使用优化器更新参数（优化器来更新）、反向传播（得到梯度）之前，一定执行
+
+```python
+optm.zero_grad()
+```
+
+同时，可以通过使用epoch（完整跑一轮数据）的参数，来设置轮数，因为整个模型的收敛需要较长的时间，所以需要设置跑多轮的方式
+
+
+
