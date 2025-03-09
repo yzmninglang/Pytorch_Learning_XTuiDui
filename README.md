@@ -23,3 +23,18 @@
 
 [Course09-Pool](./Course09-Pool),对于池化来说，一定要注意nn.MaxPool2d只接受tensor元素类型为float的类型，因此需要提前将其转化为float32，方法是在tensor(...,dtype=torch.float32),除此之外，注意ceilmode的设置
 
+
+
+###  [Course10-Activate](Course10-Activate) 
+
+ [Course10-Activate](Course10-Activate) 主要是介绍了激活函数的用法，本身没有十分特别的，注意常规操作即可
+
+
+
+###  [Course11-Linear](Course11-Linear) 
+
+这一节主要是涉及到线性层的特点，线性层主要要注意nn.Linear需要添加两个参数，输入的维度和输出维度，除此之外，需要注意Flatten的展开方式，可以参考
+
+- [torch.flatten — PyTorch 2.6 documentation](https://pytorch.org/docs/stable/generated/torch.flatten.html)
+- [Pytorch 中 torch.flatten() 和 torch.nn.Flatten() 实例详解 - 别关注我了，私信我吧 - 博客园](https://www.cnblogs.com/BlairGrowing/p/16074632.html)
+
