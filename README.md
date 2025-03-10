@@ -1,7 +1,9 @@
 # PyTorch 学习项目
 
 ## 简介
-本项目旨在通过实践学习 PyTorch 框架，涵盖了从基础到高级概念的学习与应用。通过一系列教程和练习，你将能够掌握如何构建、训练和优化深度学习模型。
+本项目旨在通过实践学习 PyTorch 框架，涵盖了从基础到高级概念的学习与应用。通过一系列教程和练习，你将能够掌握如何构建、训练和优化深度学习模型。很多的Course需要用到dataset，参考[Release 数据集 · yzmninglang/Pytorch_Learning](https://github.com/yzmninglang/Pytorch_Learning/releases/tag/1.0)。组织架构如图,对于课程一的组织架构如图，对于其他用到CIFAR10的如右图所示
+
+|![image-20250310103533504](README.assets/image-20250310103533504.png)|![image-20250310103502176](README.assets/image-20250310103502176.png)|
 
 ## 目录结构
 
@@ -9,7 +11,7 @@
 
 
 
-### Course08-Conv2d
+###  [Course08-Conv2d](Course08-Conv2d) 
 
 目录结构：[Course08-Conv2d](./Course08-Conv2d)，此次实验中主要涉及到reshape的用法，其具体内容需要参考[torch.reshape — PyTorch 2.6 documentation](https://pytorch.org/docs/stable/generated/torch.reshape.html)以及add_images的用法
 
@@ -19,7 +21,7 @@
 
 
 
-### Course09-Pool
+###  [Course09-Pool](Course09-Pool) 
 
 [Course09-Pool](./Course09-Pool),对于池化来说，一定要注意nn.MaxPool2d只接受tensor元素类型为float的类型，因此需要提前将其转化为float32，方法是在tensor(...,dtype=torch.float32),除此之外，注意ceilmode的设置
 
@@ -80,5 +82,13 @@ optm.zero_grad()
 
 ###   [Course17-ModelSave](Course17-ModelSave) 
 
-两种保存模型的方式，一种是同时保存模型参数和网络结构，另一种是只保留网络参数（字典的形式）。，需要考量到`state_dict`函数对载入和保存。
+两种保存模型的方式，一种是同时保存模型参数和网络结构，另一种是只保留网络参数（字典的形式）。，需要考量到`state_dict`函数对载入和保存
+
+
+
+###  [Course18-ModelTrainProcess](Course18-ModelTrainProcess) 
+
+主要介绍了一个模型训练的整体步骤，主要涉及模型测试集的测试**（需要关注设置no_grad），不反向传播**。除此之外，使用plt和tensorboard来画图，其中为了在终端有更好的显示，需要借助tqdm库，需参考[【PyTorch总结】tqdm的使用-CSDN博客](https://blog.csdn.net/wxd1233/article/details/118371404)。一般来说，为了让模型在中途可以更好的修改，需要注意一般需要在每个epoch的最后面保存模型，下图为epoch_num为50的Train_loss和Test_Loss（累计误差）的变化曲线,注意观察`model1.train()`和`model1.eval()`对模型的影响[Module — PyTorch 2.6 documentation](https://pytorch.org/docs/stable/generated/torch.nn.Module.html#torch.nn.Module)。
+
+![image-20250310103831542](README.assets/image-20250310103831542.png)
 
