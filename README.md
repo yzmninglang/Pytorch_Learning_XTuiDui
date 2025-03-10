@@ -92,3 +92,96 @@ optm.zero_grad()
 
 ![image-20250310103831542](README.assets/image-20250310103831542.png)
 
+# 模型训练的过程总结：Train [Course19-TrainGPU](Course19-TrainGPU) 
+
+1. 载入dataset，同时将其转化为Tensor数据类型
+
+2. 判断电脑是否有GPU
+
+   ```python
+   device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+   ```
+
+3. 使用DataLoader设置batch_size得到train_data、test_data(在后期部署的时候也要用reshape将其转化为batch_size=1的tensor)
+
+4. 定义一个模型
+
+   ```python
+   class model(nn.Module):
+       def __init__(self):
+           ....定义模型层数（Sequential）
+       def forward(self,x):
+           ....定义前向传播，return
+   ```
+
+5. 实例化一个模型`model1 =model`
+
+   1. 载入模型: `torch.load('...pth')`
+   2. 转移到GPU上`model1.to(device)`
+
+6. 定义损失函数对象（转移到GPU上）
+
+7. 定义优化器：
+
+   1. 传入模型参数
+   2. 设置学习率
+
+8. 设置epoch_num,进入epoch循环
+
+   1. 定义tqdm对象，传入dataloader对象和长度`loop = tqdm((train_data), total=len(train_data))`
+
+   2. 定义accuary_train和accuary_test
+
+   3. **model进入train模式**（model1.train()）
+
+   4. 进入loop循环：
+
+      1. 获取train_data的img（tensor）和label（tensor）（转移到GPU上）
+
+      2. 计算损失值loss = cross_loss(output,label)
+
+      3. 将**优化器的梯度清0**，loss函数反向传播
+
+      4. 使用优化器更新参数：optm.step()
+
+      5. 计算该轮的准确率，loss值，设置tqdm显示
+
+         ```python
+         loop.set_description(f'Epoch [{epoch}/{epoch_num}]')
+         temp_train_loss = temp_train_loss+loss.item()
+         accuary_temp_train = (output.argmax(1) == label).sum() / len(label)
+         accuary_train.append(accuary_temp_train)
+         loop.set_postfix(loss=loss.item(),acc= torch.tensor(accuary_train).mean().item())
+         
+         ```
+
+   5. 计算该epoch的平均准确率，总计Loss，添加到Tensorboard
+
+   6. **model进入eval模式**(model1.eval())
+
+   7. 设置tensor不带grad（梯度）：
+
+      1. 如loop循环一样，提取test_data,转移GPU，经过model，计算Loss，统计Accuary
+
+   8. 保存第`epoch`的模型，保存数据（如Loss、Accuary）
+
+
+
+# 模型测试的过程总结：Test [Course20-ModelTest](Course20-ModelTest) 
+
+1. 载入图片PIL,使用tensorforms.Compose将图片先resize（到和训练图片一致），在ToTensor，并利用reshape转为batch_size为1的图batch
+
+2. 新建实例化模型：`model1 = model`
+
+3. 载入模型数据必要时从gpu转为cpu
+
+   ```python
+   model_state = torch.load('model/model1_epoch_49.pth',map_location=torch.device('cpu'))
+   ```
+
+4. **模型进入eval模式**：model.eval()
+
+5. 设置Tensor为不计算梯度
+
+   1. 图像进入model，输出output
+   2. 输出output.argmax(1)为类别的idx，利用类别数组索引即可完成对图像的分类

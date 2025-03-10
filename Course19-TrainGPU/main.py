@@ -41,7 +41,7 @@ class model(nn.Module):
 #
 # model1 = model()
 # 将模型转移到cuda上
-model_state = torch.load('model/model1_epoch_49.pth')
+model_state = torch.load('model/model1_epoch_49.pth',map_location=torch.device('cpu'))
 # print(model1)
 model1 = model()
 model1.load_state_dict(model_state)
